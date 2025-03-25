@@ -1,1 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+void startScreen();
+int main()
+{
+    startScreen();
+    return 0;
+}
+
+// This program displays a start screen with the word "GURKA" in a stylized format 
+void startScreen(){
+    cout << "__________________________________________________" << endl;
+    cout << "|                                                |" << endl;
+    cout << "|  GGGGG   U     U  RRRRRR   K    K       A      |" << endl;
+    cout << "| G     G  U     U  R     R  K   K       A A     |" << endl;
+    cout << "| G        U     U  RRRRRR   KKKK       A   A    |" << endl;
+    cout << "| G  GGGG  U     U  R    R   K  K      AAAAAAA   |" << endl;
+    cout << "| G     G  U     U  R     R  K   K    A       A  |" << endl;
+    cout << "|  GGGGG    UUUUU   R     R  K    K  A         A |" << endl;
+    cout << "|________________________________________________|" << endl;
+}
+
 
