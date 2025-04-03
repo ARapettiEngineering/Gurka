@@ -1,15 +1,25 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <ctime>
 
 using namespace std;
 
 void startScreen();
+void dealCards(int numPlayers, int numCards);
+void game();
+
 int main()
 {
+    int numPlayers = 3; // Number of players
+    int numCards = 7;   // Number of cards per player
     startScreen();
+    dealCards(numPlayers, numCards);
     return 0;
 }
 
-// This program displays a start screen with the word "GURKA" in a stylized format 
+// This program displays a start screen with the word "GURKA" in a stylized format
 void startScreen(){
     cout << "__________________________________________________" << endl;
     cout << "|                                                |" << endl;
@@ -22,4 +32,41 @@ void startScreen(){
     cout << "|________________________________________________|" << endl;
 }
 
+void dealCards(int numPlayers, int numCards) {
+    vector<string> deck;
+    string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+    string values[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
+    // Create a deck of cards
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 13; j++) {
+            deck.push_back(values[j] + " of " + suits[i]);
+        }
+    }
+
+    // Check if there are enough cards
+    if (numPlayers * numCards > deck.size()) {
+        cout << "Not enough cards in the deck to deal!" << endl;
+        return;
+    }
+
+    // Shuffle the deck using std::srand and std::rand
+    srand(time(0));
+    random_shuffle(deck.begin(), deck.end());
+
+    // Deal cards to players
+    for (int player = 0; player < numPlayers; plyer++a) {
+        cout << "Player " << player + 1 << "'s cards:" << endl;
+        for (int card = 0; card < numCards; card++) {
+            if (!deck.empty()) {
+                cout << deck.back() << endl;
+                deck.pop_back();
+            }
+        }
+        cout << endl;
+    }
+}
+
+void game() {
+    // Placeholder for game logic
+}
