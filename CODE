@@ -7,20 +7,21 @@
 using namespace std;
 
 void startScreen();
-void dealCards(int numPlayers, int numCards);
-void game();
+void dealCards(int numPlayers, int numCards, int displayPlayer);
+void game(int numPlayers, int numCards, int displayPlayer);
 
-int main()
-{
+int main() {
     int numPlayers = 3; // Number of players
     int numCards = 7;   // Number of cards per player
+    int displayPlayer = 1; //Chooses which player to display the cards of
     startScreen();
-    dealCards(numPlayers, numCards);
+    dealCards(numPlayers, numCards, displayPlayer);
+    game(numPlayers, numCards, displayPlayer);
     return 0;
 }
 
 // This program displays a start screen with the word "GURKA" in a stylized format
-void startScreen(){
+void startScreen() {
     cout << "__________________________________________________" << endl;
     cout << "|                                                |" << endl;
     cout << "|  GGGGG   U     U  RRRRRR   K    K       A      |" << endl;
@@ -30,9 +31,11 @@ void startScreen(){
     cout << "| G     G  U     U  R     R  K   K    A       A  |" << endl;
     cout << "|  GGGGG    UUUUU   R     R  K    K  A         A |" << endl;
     cout << "|________________________________________________|" << endl;
+    cout << endl << "Please Press Enter to Start" << endl;
+    cin.ignore(); // Wait for user input to proceed
 }
 
-void dealCards(int numPlayers, int numCards) {
+void dealCards(int numPlayers, int numCards, int displayPlayer) {
     vector<string> deck;
     string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
     string values[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -50,23 +53,33 @@ void dealCards(int numPlayers, int numCards) {
         return;
     }
 
-    // Shuffle the deck using std::srand and std::rand
+    // Shuffle the deck manually
     srand(time(0));
-    random_shuffle(deck.begin(), deck.end());
+    for (size_t i = 0; i < deck.size(); i++) {
+        size_t j = i + rand() % (deck.size() - i); // Random index
+        swap(deck[i], deck[j]); // Swap cards
+    }
 
     // Deal cards to players
-    for (int player = 0; player < numPlayers; plyer++a) {
-        cout << "Player " << player + 1 << "'s cards:" << endl;
+    for (int player = 0; player < numPlayers; player++) {
+        if (player + 1 == displayPlayer) {
+            cout << "Player " << player + 1 << "'s cards:" << endl;
+        }
         for (int card = 0; card < numCards; card++) {
             if (!deck.empty()) {
-                cout << deck.back() << endl;
+                if (player + 1 == displayPlayer) {
+                    cout << deck.back() << endl; // Display only the specified player's cards
+                }
                 deck.pop_back();
             }
         }
-        cout << endl;
+        if (player + 1 == displayPlayer) {
+            cout << endl;
+        }
     }
 }
-
-void game() {
-    // Placeholder for game logic
+void game(int numPlayers, int numCards, int displayPlayer) {
+    // Informs the user to make a choice
+    cout << "Please choose a card by entering a number 1-7 representing each slot" << endl;
+    cin >> userChoice; // Get user input for card choice
 }
