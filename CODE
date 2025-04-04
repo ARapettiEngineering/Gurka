@@ -7,7 +7,6 @@
 using namespace std;
 
 void startScreen();
-void dealCards(int numPlayers, int numCards, int displayPlayer);
 void game(int numPlayers, int numCards, int displayPlayer);
 
 int main() {
@@ -15,7 +14,6 @@ int main() {
     int numCards = 7;   // Number of cards per player
     int displayPlayer = 1; //Chooses which player to display the cards of
     startScreen();
-    dealCards(numPlayers, numCards, displayPlayer);
     game(numPlayers, numCards, displayPlayer);
     return 0;
 }
@@ -35,7 +33,8 @@ void startScreen() {
     cin.ignore(); // Wait for user input to proceed
 }
 
-void dealCards(int numPlayers, int numCards, int displayPlayer) {
+void game(int numPlayers, int numCards, int displayPlayer) {
+    vector<vector<string> > playerHands(numPlayers); // Store each player's hand
     vector<string> deck;
     string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
     string values[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -46,40 +45,56 @@ void dealCards(int numPlayers, int numCards, int displayPlayer) {
             deck.push_back(values[j] + " of " + suits[i]);
         }
     }
-
     // Check if there are enough cards
     if (numPlayers * numCards > deck.size()) {
         cout << "Not enough cards in the deck to deal!" << endl;
         return;
     }
 
-    // Shuffle the deck manually
+    // Shuffle the deck
     srand(time(0));
     for (size_t i = 0; i < deck.size(); i++) {
-        size_t j = i + rand() % (deck.size() - i); // Random index
-        swap(deck[i], deck[j]); // Swap cards
+        size_t j = i + rand() % (deck.size() - i);
+        swap(deck[i], deck[j]);
     }
 
-    // Deal cards to players
+    // Deal cards to all players
     for (int player = 0; player < numPlayers; player++) {
-        if (player + 1 == displayPlayer) {
-            cout << "Player " << player + 1 << "'s cards:" << endl;
-        }
         for (int card = 0; card < numCards; card++) {
             if (!deck.empty()) {
-                if (player + 1 == displayPlayer) {
-                    cout << deck.back() << endl; // Display only the specified player's cards
-                }
+                playerHands[player].push_back(deck.back());
                 deck.pop_back();
             }
         }
-        if (player + 1 == displayPlayer) {
-            cout << endl;
+    }
+
+    // Game loop for the displayed player
+    while (!playerHands[displayPlayer - 1].empty()) {
+        // Display the displayed player's hand
+        cout << "Player " << displayPlayer << "'s cards:" << endl;
+        for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
+            cout << i + 1 << ": " << playerHands[displayPlayer - 1][i] << endl;
+        }
+
+        // Ask the player to choose a card to play
+        int choice;
+        cout << "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
+        cin >> choice;
+
+        // Validate the choice
+        if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
+            cout << "Invalid choice. Try again." << endl;
+            continue;
+        }
+
+        // Play the chosen card
+        cout << "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+
+        // Remove the card from the player's hand
+        playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
+
+        if (playerHands[displayPlayer - 1].size() == 1) {
+            cout << "Player " << displayPlayer << " has 1 card left!" << endl;
         }
     }
-}
-void game(int numPlayers, int numCards, int displayPlayer) {
-    // Informs the user to make a choice
-    cout << "Please choose a card by entering a number 1-7 representing each slot" << endl;
-    cin >> userChoice; // Get user input for card choice
 }
