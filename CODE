@@ -3,18 +3,40 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
+#include <cmath>
+#include <cstdlib> // For srand and rand
 
 using namespace std;
 
 void startScreen();
 void game(int numPlayers, int numCards, int displayPlayer);
+int stringToInt(const string& str);
 
 int main() {
     int numPlayers = 3; // Number of players
     int numCards = 7;   // Number of cards per player
     int displayPlayer = 1; //Chooses which player to display the cards of
+    int start, play;
     startScreen();
-    game(numPlayers, numCards, displayPlayer);
+    cin >> start; // Wait for user input to proceed
+    if (start == 2) {
+        cout << "\nRules:\n";
+        cout << "Gurka begins dealing 7 cards to each player.\n";
+        cout << "In this program there are 3 total players.\n";
+        cout << "When you get your cards, you may choose one to place down.\n";
+        cout << "The computer must then place a card that has a higher or equal value,\nif they do not have a card that is higher or equal value,\nthey must play their lowest card. ";
+        cout << "Whoever placed the highest card\nin the round gets to play their card first in the proceeding round.\n";
+        cout << "The game continues until everyone has 1 card left. Whoever has the\nlowest value card in the end wins. (note: Aces are worth 14)\n\n";
+        cout << "Enter 1 if you would like to continue, if not enter 2: ";
+        cin >> play;
+    }
+    if (play == 2) {
+        return 0;
+    }
+    else if (play ==1){
+            game (numPlayers,numCards,displayPlayer);
+    }
+    game (numPlayers,numCards,displayPlayer);
     return 0;
 }
 
@@ -29,15 +51,14 @@ void startScreen() {
     cout << "| G     G  U     U  R     R  K   K    A       A  |" << endl;
     cout << "|  GGGGG    UUUUU   R     R  K    K  A         A |" << endl;
     cout << "|________________________________________________|" << endl;
-    cout << endl << "Please Press Enter to Start" << endl;
-    cin.ignore(); // Wait for user input to proceed
+    cout << endl << "Please Enter 1 to Start, Enter 2 to see the rules: ";
 }
 
 void game(int numPlayers, int numCards, int displayPlayer) {
     vector<vector<string> > playerHands(numPlayers); // Store each player's hand
     vector<string> deck;
     string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    string values[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    string values[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11 or J", "12 or Q", "13 or K", "14 or A"};
 
     // Create a deck of cards
     for (int i = 0; i < 4; i++) {
@@ -71,30 +92,56 @@ void game(int numPlayers, int numCards, int displayPlayer) {
     // Game loop for the displayed player
     while (!playerHands[displayPlayer - 1].empty()) {
         // Display the displayed player's hand
-        cout << "Player " << displayPlayer << "'s cards:" << endl;
+        cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
         for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
             cout << i + 1 << ": " << playerHands[displayPlayer - 1][i] << endl;
         }
 
         // Ask the player to choose a card to play
         int choice;
-        cout << "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
+        cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
         cin >> choice;
 
         // Validate the choice
         if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-            cout << "Invalid choice. Try again." << endl;
+            cout <<endl<< "Invalid choice. Try again." << endl;
             continue;
         }
 
         // Play the chosen card
-        cout << "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+        cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
 
+        // Extract the chosen card from the player's hand
+        string chosenCard = playerHands[displayPlayer - 1][choice - 1];
+
+        // Extract the value of the card (everything before the first space)
+        string cardValue = chosenCard.substr(0, chosenCard.find(" "));
+
+        int p1cardvalue;
+        p1cardvalue = stringToInt(cardValue);
+        if (p1cardvalue > 10){
+            cout << "You picked a face card";
+        }
         // Remove the card from the player's hand
         playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
+
+        //npc plays a card
+
 
         if (playerHands[displayPlayer - 1].size() == 1) {
             cout << "Player " << displayPlayer << " has 1 card left!" << endl;
         }
     }
+}
+
+int stringToInt(const string& str) {
+    int num = 0;
+    for (unsigned int i = 0; i < str.length(); ++i) {
+        if (str[i] >= '0' && str[i] <= '9') {
+            num = num * 10 + (str[i] - '0');
+        } else {
+            break;
+        }
+    }
+    return num;
 }
