@@ -117,16 +117,51 @@ void game(int numPlayers, int numCards, int displayPlayer) {
         // Extract the value of the card (everything before the first space)
         string cardValue = chosenCard.substr(0, chosenCard.find(" "));
 
-        int p1cardvalue;
-        p1cardvalue = stringToInt(cardValue);
-        if (p1cardvalue > 10){
-            cout << "You picked a face card";
-        }
+        int p1cardvalue = stringToInt(cardValue);
+
         // Remove the card from the player's hand
         playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
 
-        //npc plays a card
+        // NPCs play their cards
+        for (int npc = 1; npc < numPlayers; npc++) {
+            int selectedCardIndex = -1;
+            int selectedCardValue = -1;
 
+            // Find the highest or lowest card based on player 1's card
+            for (size_t i = 0; i < playerHands[npc].size(); i++) {
+                string npcCardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
+                int npcCardValue = stringToInt(npcCardValueStr);
+
+                if (npcCardValue >= p1cardvalue) {
+                    // Play the lowest card that is >= player 1's card
+                    if (selectedCardIndex == -1 || npcCardValue < selectedCardValue) {
+                        selectedCardIndex = i;
+                        selectedCardValue = npcCardValue;
+                    }
+                }
+            }
+
+            //If the computer does not have a card higher or equal to the player 1 card it will play its lowest card
+            if (selectedCardIndex == -1) {
+                for (size_t i = 0; i < playerHands[npc].size(); i++) {
+                    string npcCardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
+                    int npcCardValue = stringToInt(npcCardValueStr);
+
+                    if (selectedCardIndex == -1 || npcCardValue < selectedCardValue) {
+                        selectedCardIndex = i;
+                        selectedCardValue = npcCardValue;
+                    }
+                }
+            }
+
+            // Play the selected card
+            cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
+            playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
+
+            if (playerHands[npc].size() == 1) {
+                cout<<endl << "Player " << npc + 1 << " has 1 card left!" << endl;
+            }
+        }
 
         if (playerHands[displayPlayer - 1].size() == 1) {
             cout << "Player " << displayPlayer << " has 1 card left!" << endl;
