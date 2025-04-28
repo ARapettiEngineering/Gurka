@@ -128,7 +128,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
 
             if (p1cardvalue >= com1value && p1cardvalue >= com2value){
-            //Display that Player 1 won the round
+             //Display that Player 1 won the round
             cout << endl << "\n--------------------------\n";
             cout <<"| Player 1 won the round |";
             cout << endl << "--------------------------\n";
@@ -238,7 +238,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
                 playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
             }
-            }
+        }
         else if (com1value >= p1cardvalue && com1value > com2value){
             //Display that Player 2 won the round
             cout << endl << "\n--------------------------\n";
@@ -253,14 +253,14 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 for (size_t i = 0; i < playerHands[npc].size(); i++) {
                     string npc1CardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
                     int npc1CardValue = stringToInt(npc1CardValueStr);
-                   
+
                         // Play the lowest card that is >= player 1's card
                      if (selectedCardIndex == -1 || npc1CardValue > selectedCardValue) {
                          selectedCardIndex = i;
                          selectedCardValue = npc1CardValue;
                          com1value = npc1CardValue;
                      }
-                    
+
                 }
 
 
@@ -335,12 +335,11 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Remove the card from the player's hand
             playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
-
         }
-        else if (com2value >= p1cardvalue && com2value >= com1value || com2value == com1value){
+        else if (com2value >= p1cardvalue && com2value >= com1value){
             //Display Player 3 won the round
             cout << endl << "\n--------------------------\n";
-            cout <<         "| Player 3 won the round |"; 
+            cout <<         "| Player 3 won the round |";
             cout << endl << "--------------------------\n";
             // NPC2 play their cards
             for (int npc = 2; npc < 3; npc++) {
@@ -351,17 +350,17 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 for (size_t i = 0; i < playerHands[npc].size(); i++) {
                     string npc2CardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
                     int npc2CardValue = stringToInt(npc2CardValueStr);
-                   
+
                      // Play the lowest card that is >= player 1's card
                      if (selectedCardIndex == -1 || npc2CardValue > selectedCardValue) {
                         selectedCardIndex = i;
                         selectedCardValue = npc2CardValue;
                         com2value = npc2CardValue;
                      }
-                    
+
                 }
 
-                
+
            // Play the selected card
                 cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
                 playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
