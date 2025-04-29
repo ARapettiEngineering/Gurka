@@ -126,6 +126,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
         }
     }
+    }
  // Display the displayed player's hand
             cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
             for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
