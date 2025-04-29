@@ -126,7 +126,6 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
         }
     }
-    }
  // Display the displayed player's hand
             cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
             for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
@@ -240,7 +239,8 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             //Allows player 1 to play their card first if they had the highest card in the previous round
             if (p1cardvalue >= com1value && p1cardvalue >= com2value){
-             //Display that Player 1 won the round
+                cout << p1cardvalue << " " << com1value << " " << com2value << endl;
+                //Display that Player 1 won the round
             cout << endl << "\n--------------------------\n";
             cout <<"| Player 1 won the round |";
             cout << endl << "--------------------------\n";
