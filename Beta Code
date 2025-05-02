@@ -133,7 +133,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
 
             // Ask the player to choose a card to play
-            double choice;
+            int choice;
             // Validate the choice
             while (true) {
 
@@ -321,17 +321,24 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout << i + 1 << ": " << playerHands[displayPlayer - 1][i] << endl;
             }
 
-            // Ask the player to choose a card to play
-            int choice;
+
+ // Validate the choice
+            while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
 
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
@@ -385,15 +392,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+             while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
 
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
@@ -460,15 +474,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+            while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
 
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
@@ -600,16 +621,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+           while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
-
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
 
@@ -674,15 +701,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+            while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
 
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
@@ -849,16 +883,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+            while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
-
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card." << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card." << endl;
+        }
+    }
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
 
@@ -913,16 +953,22 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // Ask the player to choose a card to play
             int choice;
+            while (true) {
+
             cout <<endl<< "Choose a card to play (1-" << playerHands[displayPlayer - 1].size() << "): ";
             cin >> choice;
 
-            // Validate the choice
-            if (choice < 1 || choice > playerHands[displayPlayer - 1].size()) {
-                cout <<endl<< "Invalid choice. Try again." << endl;
-                cin >> choice;
-                continue;
-            }
-
+        //Only allows the input numbers
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please choose a card" << endl;
+        } else if (choice >= 1 && choice <= playerHands[displayPlayer - 1].size()) {
+            break; // Valid input
+        } else {
+            cout << "Invalid choice. Please choose a card" << endl;
+        }
+    }
             // Play the chosen card
             cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
 
