@@ -72,7 +72,6 @@ int main()
         system("cls");
             dealCards(numPlayers, numCards);
     }
-dealCards(numPlayers, numCards);
     return 0;
 }
 
@@ -127,5 +126,4 @@ void dealCards(int numPlayers, int numCards) {
 }
 
 void game() {
-    // Placeholder for game logic
 }
