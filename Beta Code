@@ -228,7 +228,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 if (com1value<p1cardvalue){
                     lowestCardPlayer = 2;
                 }
-           }
+            }
             // NPC2 play their cards
             for (int npc = 2; npc < 3; npc++) {
                 int selectedCardIndex = -1;
@@ -268,7 +268,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 if (com2value >= com1value && com2value >= p1cardvalue){
                     highestCardPlayer = 3;
                 }
-                else if (p1cardvalue > com1value && p1cardvalue >com2value) {
+                else if (p1cardvalue > com1value && p1cardvalue > com2value) {
                     highestCardPlayer = 1;
                 }
                 //If player 3 has the lowest card
@@ -292,14 +292,18 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     lowestCardPlayer = 6;
                 }
                 //If all 3 players tie with the lowest card
-                else if (com1value == com2value && com1value){
+                else if (com1value == com2value && com1value == p1cardvalue){
                     lowestCardPlayer = 7;
                 }
                 if (playerHands[displayPlayer - 1].size()!= 0) {
+                    if (playerHands[displayPlayer - 1].empty()) {
+                        break;
+                    }
                 //Displays which player won the round
                 cout << endl << "\n--------------------------\n";
                 cout << "| Player " << highestCardPlayer << " won the round |";
                 cout << endl << "--------------------------\n";
+                }
             }
         }
         //Allows player 2 to play their card first if they had the highest card in the previous round
@@ -368,6 +372,9 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             if (com2value >= com1value){
                 highestCardPlayer = 3;
             }
+            if (com2value <= com1value){
+                lowestCardPlayer = 3;
+            }
              // Display the displayed player's hand
             cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
             for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
@@ -411,6 +418,36 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             if (p1cardvalue >= com2value && p1cardvalue >= com1value){
                 highestCardPlayer = 1;
             }
+            else if (com1value > com2value && com1value > p1cardvalue){
+                highestCardPlayer = 2;
+            }
+            //If player 2 has the lowest card
+            if (com1value < p1cardvalue && com1value < com1value){
+                    lowestCardPlayer = 2;
+            }
+                //If player 1 has the lowest card
+            else if (p1cardvalue < com1value && p1cardvalue < com2value){
+                lowestCardPlayer = 1;
+            }
+                //If player 1 and 2 tie with the lowest card
+            else if (p1cardvalue == com1value && p1cardvalue < com2value){
+                  lowestCardPlayer = 4;
+            }
+                //If player 1 and 3 tie with the lowest card
+            else if (p1cardvalue == com2value && p1cardvalue < com1value){
+                lowestCardPlayer = 5;
+            }
+                //If player 2 and 3 tie with the lowest card
+            else if (com1value == com2value && com1value < p1cardvalue){
+                lowestCardPlayer = 6;
+            }
+                //If all 3 players tie with the lowest card
+            else if (com1value == com2value && com1value == p1cardvalue){
+                lowestCardPlayer = 7;
+            }
+            if (playerHands[displayPlayer - 1].empty()) {
+                    break;
+                }
             if (playerHands[displayPlayer - 1].size()!= 0) {
             //Display who won the game
             cout << endl << "\n--------------------------\n";
@@ -419,7 +456,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
         }
         //Allows player 2 to play their card first if they had the highest card in the previous round
-        if (highestCardPlayer == 3){
+        if (highestCardPlayer == 3 && playerHands[displayPlayer-1].size()!= 0){
             cout << p1cardvalue << " " << com1value << " " << com2value << endl;
             // NPC2 play their cards
             for (int npc = 2; npc < 3; npc++) {
@@ -488,6 +525,9 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             if (p1cardvalue >= com2value) {
                 highestCardPlayer = 1;
             }
+            if (p1cardvalue < com2value) {
+                lowestCardPlayer = 1;
+            }
          // NPC1 play their cards
             for (int npc = 1; npc < 2; npc++) {
                 int selectedCardIndex = -1;
@@ -527,36 +567,69 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 if (com1value >= com2value && com1value >= p1cardvalue){
                   highestCardPlayer = 2;
                 }
+                if (com2value > p1cardvalue && com2value > com1value) {
+                    highestCardPlayer = 3;
+                }
+                     //If player 3 has the lowest card
+                if (com2value < p1cardvalue && com2value < com1value){
+                    lowestCardPlayer = 3;
+                }
+                //If player 1 has the lowest card
+                else if (p1cardvalue < com1value && p1cardvalue < com2value){
+                    lowestCardPlayer = 1;
+                }
+                //If player 1 and 2 tie with the lowest card
+                else if (p1cardvalue == com1value && p1cardvalue < com2value){
+                    lowestCardPlayer = 4;
+                }
+                //If player 1 and 3 tie with the lowest card
+                else if (p1cardvalue == com2value && p1cardvalue < com1value){
+                    lowestCardPlayer = 5;
+                }
+                //If player 2 and 3 tie with the lowest card
+                else if (com1value == com2value && com1value < p1cardvalue){
+                    lowestCardPlayer = 6;
+                }
+                //If all 3 players tie with the lowest card
+                else if (com1value == com2value && com1value == p1cardvalue){
+                    lowestCardPlayer = 7;
+                }
+                if (playerHands[displayPlayer - 1].empty()) {
+                    break;
+                }
                 if (playerHands[displayPlayer - 1].size()!= 0) {
                  //Displays which player won the round
                 cout << endl << "\n--------------------------\n";
                 cout << "| Player " << highestCardPlayer << " won the round |";
                 cout << endl << "--------------------------\n";
                 }
+                if (playerHands[displayPlayer - 1].empty()) {
+                    break;
+                }
             }
-       if (playerHands[displayPlayer - 1].empty()) {
-            if (lowestCardPlayer == 1) {
-                cout << "Player " << displayPlayer << " has the lowest card!" << endl;
-            } else if (lowestCardPlayer == 2) {
-                cout << "Player " << displayPlayer << " has the lowest card!" << endl;
-            } else if (lowestCardPlayer == 3) {
-                cout << "Player " << displayPlayer << " has the lowest card!" << endl;
-        }
+            if (playerHands[displayPlayer - 1].size() == 0) {
+                if (lowestCardPlayer == 1) {
+                    cout << "Player 1 has the lowest card!" << endl;
+                } 
+                else if (lowestCardPlayer == 2) {
+                    cout << "Player 2 has the lowest card!" << endl;
+                } 
+                else if (lowestCardPlayer == 3) {
+                    cout << "Player 3 has the lowest card!" << endl;
+                }
+            }
         }
     }
 }
-}
-}
+
 int stringToInt(const string& str) {
     int num = 0;
     for (unsigned int i = 0; i < str.length(); ++i) {
         if (str[i] >= '0' && str[i] <= '9') {
             num = num * 10 + (str[i] - '0');
-        }
-        else {
+        } else {
             break;
         }
     }
     return num;
 }
-
