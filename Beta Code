@@ -20,7 +20,7 @@ int lowestCardPlayer = 1;
 
 int main() {
     int numPlayers = 3; // Number of players
-    int numCards = 7;   // Number of cards per player
+    int numCards = 6;   // Number of cards per player
     int displayPlayer = 1; //Chooses which player to display the cards of
     int start, play;
     startScreen();
@@ -610,12 +610,24 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             if (playerHands[displayPlayer - 1].size() == 0) {
                 if (lowestCardPlayer == 1) {
                     cout << "Player 1 has the lowest card!" << endl;
-                } 
+                }
                 else if (lowestCardPlayer == 2) {
                     cout << "Player 2 has the lowest card!" << endl;
-                } 
+                }
                 else if (lowestCardPlayer == 3) {
                     cout << "Player 3 has the lowest card!" << endl;
+                }
+                else if (lowestCardPlayer == 4) {
+                    cout << "Player 1 and Player 2 have the lowest card!" << endl;
+                }
+                else if (lowestCardPlayer == 5) {
+                    cout << "Player 1 and Player 3 have the lowest card!" << endl;
+                }
+                else if (lowestCardPlayer == 6) {
+                    cout << "Player 2 and Player 3 have the lowest card!" << endl;
+                }
+                else if (lowestCardPlayer == 7) {
+                    cout << "All players have the same lowest card!" << endl;
                 }
             }
         }
