@@ -607,32 +607,6 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     break;
                 }
             }
-            if (playerHands[displayPlayer - 1].empty() ||
-                (playerHands[0].size() == 1 && playerHands[1].size() == 1 && playerHands[2].size() == 1)) {
-                // Determine and display the player(s) with the lowest card
-                if (lowestCardPlayer == 1) {
-                    cout << "Player 1 has the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 2) {
-                    cout << "Player 2 has the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 3) {
-                    cout << "Player 3 has the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 4) {
-                    cout << "Player 1 and Player 2 have the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 5) {
-                    cout << "Player 1 and Player 3 have the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 6) {
-                    cout << "Player 2 and Player 3 have the lowest card!" << endl;
-                }
-                else if (lowestCardPlayer == 7) {
-                    cout << "All players have the same lowest card!" << endl;
-                }
-                break;
-            }
         }
 
         // Check if the game has ended
@@ -670,6 +644,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             playerHands[2].clear();
 
             // Determine the lowest card among the last cards of all players
+
             if (p1cardvalue < com1value && p1cardvalue < com2value) {
                 cout << "Player 1 has the lowest card!" << endl;
             } else if (com1value < p1cardvalue && com1value < com2value) {
