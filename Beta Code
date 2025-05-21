@@ -6,8 +6,6 @@
 #include <cmath>
 #include <cstdlib> // For srand and rand
 #include <limits>
-#include <thread>
-#include <chrono>
 
 using namespace std;
 int p1score = 30;
@@ -16,6 +14,7 @@ int p3score = 30;
 int winner = 0;
 void startScreen();
 void game(int numPlayers, int numCards, int displayPlayer);
+
 int main() {
 
     int numPlayers = 3; // Number of players
@@ -44,7 +43,7 @@ int main() {
     if (start == 2) {
             system("cls");
         cout << "\nRules:\n";
-        cout << "Gurka begins dealing 7 cards to each player.\n";
+        cout << "Gurka begins dealing 6 cards to each player.\n";
         cout << "In this program there are 3 total players.\n";
         cout << "When you get your cards, you may choose one to place down.\n";
         cout << "The computer must then place a card that has a higher or equal value,\nif they do not have a card that is higher or equal value,\nthey must play their lowest card. ";
@@ -56,8 +55,10 @@ int main() {
         game (numPlayers,numCards,displayPlayer);
     }
     while (winner == 0){
-        system("cls");
+
         cout << "Starting New Game\n";
+        system("pause");
+        system("cls");
         game (numPlayers,numCards,displayPlayer);
     }
     return 0;
@@ -170,6 +171,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
 
             // NPC1 play their cards
+            if (p2score >= 1){
             for (int npc = 1; npc < 2; npc++) {
                 int selectedCardIndex = -1;
                 int selectedCardValue = -1;
@@ -205,7 +207,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 // Play the selected card
                 cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
                 playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
-
+            }
                 if (com1value>=p1cardvalue){
                     highestCardPlayer = 2;
                 }
@@ -213,7 +215,9 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     lowestCardPlayer = 2;
                 }
             }
+
             // NPC2 play their cards
+            if (p3score >= 1){
             for (int npc = 2; npc < 3; npc++) {
                 int selectedCardIndex = -1;
                 int selectedCardValue = -1;
@@ -249,12 +253,15 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 // Play the selected card
                 cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
                 playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
+            }
+
                 if (com2value >= com1value && com2value >= p1cardvalue){
                     highestCardPlayer = 3;
                 }
                 else if (p1cardvalue > com1value && p1cardvalue > com2value) {
                     highestCardPlayer = 1;
                 }
+
                 //If player 3 has the lowest card
                 if (com2value < p1cardvalue && com2value < com1value){
                     lowestCardPlayer = 3;
@@ -288,6 +295,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout << "| Player " << highestCardPlayer << " won the round |";
                 cout << endl << "--------------------------\n";
                 }
+                system("pause");
             }
         }
         //Allows player 2 to play their card first if they had the highest card in the previous round
@@ -438,6 +446,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             cout << "| Player " << highestCardPlayer << " won the round |";
             cout << endl << "--------------------------\n";
             }
+            system("pause");
         }
         //Allows player 2 to play their card first if they had the highest card in the previous round
         if (highestCardPlayer == 3 && playerHands[0].size()!= 1 && p3score >=1){
@@ -586,6 +595,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout << "| Player " << highestCardPlayer << " won the round |";
                 cout << endl << "--------------------------\n";
                 }
+                system("pause");
                 if (playerHands[displayPlayer - 1].empty()) {
                     break;
                 }
