@@ -173,6 +173,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             // NPC1 play their cards
             if (p2score >= 1) {
                 for (int npc = 1; npc < 2; npc++) {
+                    if (p2score < 1) continue; // <-- ADD THIS LINE
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
 
@@ -303,6 +304,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
             else {
                 for (int npc = 2; npc < 3; npc++) {
+                    if (p3score < 1) continue; // <-- ADD THIS LINE
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
 
@@ -390,6 +392,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             // NPC1 play their cards
             if (p2score >= 1) {
                 for (int npc = 1; npc < 2; npc++) {
+                    if (p2score < 1) continue; // <-- ADD THIS LINE
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
                     if (playerHands[npc].empty()) continue;
@@ -415,6 +418,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             // NPC2 play their cards
             if (p3score >= 1) {
                 for (int npc = 2; npc < 3; npc++) {
+                    if (p3score < 1) continue; // <-- ADD THIS LINE
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
                     if (playerHands[npc].empty()) continue;
@@ -509,7 +513,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 highestCardPlayer = 2;
             }
             //If player 2 has the lowest card
-            if (com1value < p1cardvalue && com1value < com1value){
+            if (com1value < p1cardvalue && com1value < com2value){
                     lowestCardPlayer = 2;
             }
                 //If player 1 has the lowest card
@@ -548,6 +552,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
         if (highestCardPlayer == 3 && playerHands[0].size() != 1 && p3score >= 1) {
             // NPC2 (Player 3) plays only if score >= 1
                 for (int npc = 2; npc < 3; npc++) {
+                    if (p3score < 1) continue; // <-- ADD THIS LINE
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
                     if (playerHands[npc].empty()) continue;
@@ -619,6 +624,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
          // NPC1 play their cards
             if (p2score >=1) {
             for (int npc = 1; npc < 2; npc++) {
+                if (p2score < 1) continue; // <-- ADD THIS LINE
                 int selectedCardIndex = -1;
                 int selectedCardValue = -1;
 
