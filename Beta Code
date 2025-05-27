@@ -465,11 +465,23 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
              // Only allow player 1 to play if their score is >= 1
             if (p1score >= 1) {
-                // Display the displayed player's hand
                 cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
                 for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
                     cout << i + 1 << ": " << playerHands[displayPlayer - 1][i] << endl;
                 }
+                // Find lowest card index and value for player 1
+                int lowestIdx = 0;
+                int lowestValue = stringToInt(playerHands[displayPlayer - 1][0].substr(0, playerHands[displayPlayer - 1][0].find(" ")));
+                string lowestCard = playerHands[displayPlayer - 1][0];
+                for (size_t i = 1; i < playerHands[displayPlayer - 1].size(); ++i) {
+                    int val = stringToInt(playerHands[displayPlayer - 1][i].substr(0, playerHands[displayPlayer - 1][i].find(" ")));
+                    if (val < lowestValue) {
+                        lowestValue = val;
+                        lowestIdx = i;
+                        lowestCard = playerHands[displayPlayer - 1][i];
+                    }
+                }
+                // Now lowestCard holds the string of player 1's lowest card, and lowestValue its value
 
                 // Ask the player to choose a card to play
                 int choice;
@@ -502,7 +514,6 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
                 // Update the global p1cardvalue
                 p1cardvalue = stringToInt(cardValue);
-
                 // Remove the card from the player's hand
                 playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
                 if (p1cardvalue >= com2value && p1cardvalue >= com1value){
@@ -580,6 +591,19 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             for (size_t i = 0; i < playerHands[displayPlayer - 1].size(); i++) {
                 cout << i + 1 << ": " << playerHands[displayPlayer - 1][i] << endl;
             }
+            // Find lowest card index and value for player 1
+            int lowestIdx = 0;
+            int lowestValue = stringToInt(playerHands[displayPlayer - 1][0].substr(0, playerHands[displayPlayer - 1][0].find(" ")));
+            string lowestCard = playerHands[displayPlayer - 1][0];
+            for (size_t i = 1; i < playerHands[displayPlayer - 1].size(); ++i) {
+                int val = stringToInt(playerHands[displayPlayer - 1][i].substr(0, playerHands[displayPlayer - 1][i].find(" ")));
+                if (val < lowestValue) {
+                    lowestValue = val;
+                    lowestIdx = i;
+                    lowestCard = playerHands[displayPlayer - 1][i];
+                }
+            }
+            // Now lowestCard holds the string of player 1's lowest card, and lowestValue its value
 
             // Ask the player to choose a card to play
             int choice;
