@@ -617,7 +617,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     lowestCard = playerHands[displayPlayer - 1][i];
                 }
             }
-            // Now lowestCard holds the string of player 1's lowest card, and lowestValue its value
+            // lowestCard holds player 1's lowest card
 
             // Ask the player to choose a card to play
             int choice;
