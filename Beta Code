@@ -155,8 +155,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 }
             }
 
-            // Play the chosen card
-            cout <<endl<< "You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+
 
             // Extract the chosen card from the player's hand
             string chosenCard = playerHands[displayPlayer - 1][choice - 1];
@@ -167,6 +166,27 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             // Update the global p1cardvalue
             p1cardvalue = stringToInt(cardValue);
 
+            // Play the chosen card
+            if (p1cardvalue >= 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P1      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<p1cardvalue<<"   |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P1|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (p1cardvalue < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P1      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<p1cardvalue<<"    |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P1|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
             // Remove the card from the player's hand
             playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
 
@@ -206,8 +226,28 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                         }
                     }
 
-                    // Play the selected card
-                    cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
+            // Play the NPC's card
+            if (com1value >= 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P2      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com1value<<"   |  Player 2 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P2|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (com1value < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P2      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com1value<<"    |  Player 2 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P2|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+
                     playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 }
                 if (p2score > 1 && com1value>=p1cardvalue){
@@ -253,8 +293,28 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                             }
                         }
 
-                        // Play the selected card
-                        cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
+                 // Play the NPC's card
+                 if (com2value >= 10) {
+                 cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"   |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (com2value < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"    |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+
                         playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                     }
                 }
@@ -262,7 +322,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
             // NPC2 play their cards
             if (p3score >= 1 && p2score >=1) {
-                if (p2score <= p1score){
+                if (com1value < p1cardvalue) {
                     for (int npc = 2; npc < 3; npc++) {
                     int selectedCardIndex = -1;
                     int selectedCardValue = -1;
@@ -296,8 +356,86 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                             }
                         }
 
-                        // Play the selected card
-                        cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
+                        // Play the NPC's card
+                 if (com2value >= 10) {
+                 cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"   |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (com2value < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"    |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+
+                        playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
+                    }
+                } else if (com1value>=p1cardvalue){
+                   for (int npc = 2; npc < 3; npc++) {
+                    int selectedCardIndex = -1;
+                    int selectedCardValue = -1;
+
+                    // Find the highest or lowest card based on player 2's card
+                    for (size_t i = 0; i < playerHands[npc].size(); i++) {
+                        string npc2CardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
+                        int npc2CardValue = stringToInt(npc2CardValueStr);
+                        if (npc2CardValue >= com1value) {
+                            // Play the lowest card that is >= player 1's card
+                            if (selectedCardIndex == -1 || npc2CardValue < selectedCardValue) {
+                                selectedCardIndex = i;
+                                selectedCardValue = npc2CardValue;
+                                com2value = npc2CardValue;
+                            }
+                        }
+
+                    }
+
+                    //If the computer does not have a card higher or equal to the player 1 card it will play its lowest card
+                        if (selectedCardIndex == -1) {
+                            for (size_t i = 0; i < playerHands[npc].size(); i++) {
+                                string npc2CardValueStr = playerHands[npc][i].substr(0, playerHands[npc][i].find(" "));
+                                int npc2CardValue = stringToInt(npc2CardValueStr);
+
+                                if (selectedCardIndex == -1 || npc2CardValue < selectedCardValue) {
+                                    selectedCardIndex = i;
+                                    selectedCardValue = npc2CardValue;
+                                    com2value = npc2CardValue;
+                                }
+                            }
+                        }
+
+                        // Play the NPC's card
+                 if (com2value >= 10) {
+                 cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"   |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (com2value < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"    |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+
                         playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                     }
                 }
@@ -337,8 +475,28 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                         }
                     }
 
-                    // Play the selected card
-                    cout <<endl << "Player " << npc + 1 << " played: " << playerHands[npc][selectedCardIndex] << endl;
+                    // Play the NPC's card
+                 if (com2value >= 10) {
+                 cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"   |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+            else if (com2value < 10) {
+                cout <<" ________"<<endl;
+                cout <<"/P3      \\"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|   "<<com2value<<"    |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
+                cout <<"|        |"<<endl;
+                cout <<"|      P3|"<<endl;
+                cout <<"\\________/"<<endl;
+            }
+
                     playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 }
             }
@@ -786,6 +944,8 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             cout <<endl<< "Player 3 played: " << playerHands[2][0] << endl;
             com2value = stringToInt(playerHands[2][0].substr(0, playerHands[2][0].find(" ")));
             playerHands[2].clear();
+            cout << endl;
+            system("pause");
             }
             // Determine the lowest card among the last cards of all players
 
@@ -823,13 +983,64 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             //P1 Wins
             if (p2score <= 0 && p3score <= 0){
                 winner = 1;
+                system("cls");
+                //Displays a medal and "You Win" whenever the player wins the game
+                cout << " =+++++++++++++++++..+++++++++++++++++=\n";
+                cout << " .#%%%%%%%%%%%%%%%%##%%%%%%%%%%%%%%%%#:\n";
+                cout << "  :%%%%%%%%%%%%%%%#+%%%%%%%%%%%%%%%%%:\n";
+                cout << "   -%%%%%%%%%%%%%%+%%%%%%%%%%%%%%%%%-.\n";
+                cout << "   .*%%%%%%%%%%%%+%%%%%%%%%%%%%%%%%*.\n";
+                cout << "   .*%%%%%%%%%%=%%%%%%%%%%%%%%%%%#..\n";
+                cout << "    .#%%%%%%%%##%%%%%%%%%%%%%%%%#.\n";
+                cout << "     :%%%%%%%#+@%%%%%%%%%%%%%%%%:.\n";
+                cout << "     -%%%%%%+%%%%%%%%%%%%%%%%%-.\n";
+                cout << "     .+%%%%+%%%%%%%%%%%%%%%%%*..\n";
+                cout << "      .*%%=%%%%%%%%%%%%%%%%%*..\n";
+                cout << "       :*+#%%%%%%%%%%%%%%%%#:.\n";
+                cout << "      =#.=#################-#=.\n";
+                cout << "      =#.                  .#=\n";
+                cout << "      =#. .:**%@@%%@@%#*:. .#=.\n";
+                cout << "      -++%@%%%%*++++*#%%%%%++-.\n";
+                cout << "     .-%%%%*.......   .. .*%%%%-.\n";
+                cout << "    :%%%#....................#%%%:\n";
+                cout << "  .+@%#:...........***-...... .#%%+.\n";
+                cout << "  +%%+.         :#@%%%=.       .+%%*.\n";
+                cout << ".+%%+.      .#%%%%%%%%=.        .+%%+.\n";
+                cout << ":%%#.       .#%%%%%%%%=.         .*%%:\n";
+                cout << "=%%-.       ....:%%%%%=.          :%@=\n";
+                cout << "*%%:            :%%%%%=.          :#%*\n";
+                cout << "#%#.            :%%%%%=.          .#%#\n";
+                cout << "*%%:            :%%%%%=.          :%%*\n";
+                cout << "-%%=            :%%%%%=.          -%%-\n";
+                cout << ".#%%.           :%%%%%=.         .%%#.\n";
+                cout << " :%%#.          :%%%%%=.        .#%%:.\n";
+                cout << "  :%%%..        :%%%%%=.      ..%%%:.\n";
+                cout << "   .%%%*.       .=====:.     .+%%%...\n";
+                cout << "    .=%%%*:                :*%%%=...\n";
+                cout << "     .=%%%%#-:..  .. .:-#%%%%=...\n";
+                cout << "         .=%%%%%%%%%@%%%%%%=..\n";
+                cout << "            ..:-=+**+=-:....\n\n";
+                cout << " /$$     /$$                           /$$      /$$ /$$          \n";
+                cout << "|  $$   /$$/                          | $$  /$ | $$|__/          \n";
+                cout << " \\  $$ /$$/   /$$$$$$  /$$   /$$      | $$ /$$$| $$ /$$ /$$$$$$$ \n";
+                cout << "  \\  $$$$/   /$$__  $$| $$  | $$      | $$/$$ $$ $$| $$| $$__  $$\n";
+                cout << "   \\  $$/   | $$  \\ $$| $$  | $$      | $$$$_  $$$$| $$| $$  \\ $$\n";
+                cout << "    | $$    | $$  | $$| $$  | $$      | $$$/ \\  $$$| $$| $$  | $$\n";
+                cout << "    | $$    |  $$$$$$/|  $$$$$$/      | $$/   \\  $$| $$| $$  | $$\n";
+                cout << "    |__/     \\______/  \\______/       |__/     \\__/|__/|__/  |__/\n";
             }
-            //P2 Wjns
-            if (p1score <= 0 && p3score <= 0){
-                winner = 1;
-            }
-            //P3 Wins
-            if (p1score <= 0 && p2score <= 0){
+            //P1 Looses
+            if (p1score <= 0){
+                system("cls");
+                //Display "You Lose" when your score goes below 1
+                cout << " /$$     /$$                           /$$                                    \n";
+                cout << "|  $$   /$$/                          | $$                                    \n";
+                cout << " \\  $$ /$$/   /$$$$$$  /$$   /$$      | $$        /$$$$$$   /$$$$$$$  /$$$$$$ \n";
+                cout << "  \\  $$$$/   /$$__  $$| $$  | $$      | $$       /$$__  $$ /$$_____/ /$$__  $$\n";
+                cout << "   \\  $$/   | $$  \\ $$| $$  | $$      | $$      | $$  \\ $$|  $$$$$$ | $$$$$$$$\n";
+                cout << "    | $$    | $$  | $$| $$  | $$      | $$      | $$  | $$ \\____  $$| $$_____/\n";
+                cout << "    | $$    |  $$$$$$/|  $$$$$$/      | $$$$$$$$|  $$$$$$/ /$$$$$$$/|  $$$$$$$\n";
+                cout << "    |__/     \\______/  \\______/       |________/ \\______/ |_______/  \\_______/\n";
                 winner = 1;
             }
             break;
