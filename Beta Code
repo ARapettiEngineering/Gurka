@@ -10,7 +10,7 @@
 using namespace std;
 int p1score = 30;
 int p2score = 30;
-int p3score = 30;
+int p3score = 1;
 int winner = 0;
 void startScreen();
 void game(int numPlayers, int numCards, int displayPlayer);
@@ -110,10 +110,8 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
     // Deal cards to all players
     for (int player = 0; player < numPlayers; player++) {
-        cout << "Player " << player + 1 << "'s cards:" << endl;
         for (int card = 0; card < numCards; card++) {
             if (!deck.empty()) {
-                cout << deck.back() << endl;
                 playerHands[player].push_back(deck.back());
                 deck.pop_back();
             }
@@ -590,6 +588,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<"|      P2|"<<endl;
                 cout <<"\\________/"<<endl;
             }
+            playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 }
             // NPC2 play their cards
             if (p3score >= 1) {
@@ -648,6 +647,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<"|      P3|"<<endl;
                 cout <<"\\________/"<<endl;
             }
+            playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 }
                 if (p3score > 1 && com2value >= com1value){
                     highestCardPlayer = 3;
@@ -704,29 +704,50 @@ void game(int numPlayers, int numCards, int displayPlayer) {
 
                 // Update the global p1cardvalue
                 p1cardvalue = stringToInt(cardValue);
-                if (p1cardvalue >= com1value){
-                // Play the chosen card
-                    if (p1cardvalue >= 10) {
-                        cout <<" ________"<<endl;
-                        cout <<"/P1      \\"<<endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|   "<<p1cardvalue<<"   |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|      P1|"<<endl;
-                        cout <<"\\________/"<<endl;
-                    }
-                    else if (p1cardvalue < 10) {
-                        cout <<" ________"<<endl;
-                        cout <<"/P1      \\"<<endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|   "<<p1cardvalue<<"    |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
-                        cout <<"|        |"<<endl;
-                        cout <<"|      P1|"<<endl;
-                        cout <<"\\________/"<<endl;
-                    }
+                if (p1cardvalue > lowestValue && p1cardvalue >= com1value){
+                if (p1cardvalue >= 10) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"   |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
                 }
+                else if (p1cardvalue < 10) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"    |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
+                }
+            }
+           else if (p1cardvalue == lowestValue) {
+                if (p1cardvalue >= 10) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"   |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
+                }
+                else if (p1cardvalue < 10) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"    |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
+                }
+            }
 
                 else if (p1cardvalue < com1value && p1cardvalue != lowestValue) {
                     p1cardvalue = lowestValue;
@@ -841,6 +862,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<"|      P3|"<<endl;
                 cout <<"\\________/"<<endl;
             }
+            playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
             }
           // Display the displayed player's hand
             cout <<endl << "Player " << displayPlayer << "'s cards:" << endl;
@@ -890,7 +912,29 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             // Update the global p1cardvalue
             p1cardvalue = stringToInt(cardValue);
             // Play the chosen card
-            if (p1cardvalue >= com2value){
+            if (p1cardvalue > lowestValue){
+                if (p1cardvalue >= 10 && p1cardvalue >= com2value) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"   |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
+                }
+                else if (p1cardvalue < 10) {
+                    cout <<" ________"<<endl;
+                    cout <<"/P1      \\"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|   "<<p1cardvalue<<"    |  "<<"You played: " << playerHands[displayPlayer - 1][choice - 1] << endl;
+                    cout <<"|        |"<<endl;
+                    cout <<"|      P1|"<<endl;
+                    cout <<"\\________/"<<endl;
+                }
+            }
+            if (p1cardvalue == lowestValue) {
                 if (p1cardvalue >= 10) {
                     cout <<" ________"<<endl;
                     cout <<"/P1      \\"<<endl;
@@ -913,7 +957,6 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 }
             }
 
-            
             if (p1cardvalue < com2value && p1cardvalue != lowestValue) {
                 p1cardvalue = lowestValue;
                 cout <<endl<< "Auto Playing lowest card: " << lowestCard << endl;
@@ -995,6 +1038,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<"|      P2|"<<endl;
                 cout <<"\\________/"<<endl;
             }
+            playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 if (p2score > 1 && com1value >= com2value && com1value >= p1cardvalue){
                   highestCardPlayer = 2;
                 }
@@ -1144,33 +1188,77 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<endl<< "Player 1 has the lowest card!" << endl;
                 p2score=p2score-com1value;
                 p3score=p3score-com2value;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
+                 if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }
             } else if (com1value < p1cardvalue && com1value < com2value) {
                 cout <<endl<< "Player 2 has the lowest card!" << endl;
                 p1score=p1score-p1cardvalue;
                 p3score=p3score-com2value;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
-            } else if (com2value < p1cardvalue && com2value < com1value) {
+                if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }            } else if (com2value < p1cardvalue && com2value < com1value) {
                 cout <<endl<< "Player 3 has the lowest card!" << endl;
                 p1score=p1score-p1cardvalue;
                 p2score=p2score-com1value;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
-            } else if (p1cardvalue == com1value && p1cardvalue < com2value) {
+                if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }            } else if (p1cardvalue == com1value && p1cardvalue < com2value) {
                 cout <<endl<< "Player 1 and Player 2 have the lowest card!" << endl;
                 p3score=p3score-com2value;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
+                if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }
             } else if (p1cardvalue == com2value && p1cardvalue < com1value) {
                 cout <<endl<< "Player 1 and Player 3 have the lowest card!" << endl;
                 p2score=p2score-com1value;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
-            } else if (com1value == com2value && com1value < p1cardvalue) {
+                if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }            } else if (com1value == com2value && com1value < p1cardvalue) {
                 cout <<endl<< "Player 2 and Player 3 have the lowest card!" << endl;
                 p1score=p1score-p1cardvalue;
                 cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
             } else if (p1cardvalue == com1value && p1cardvalue == com2value) {
                 cout <<endl<< "All players have the same lowest card!" << endl;
-                cout <<endl<<"Player 1's score is "<<p1score<<endl<<"Player 2's score is "<<p2score<<endl<<"Player 3's score is "<<p3score<<endl;
-            }
+                if (p1score > 0) {
+                cout <<endl<<"Player 1's score is "<<p1score<<endl;
+                }
+                if (p2score > 0) {
+                cout <<"Player 2's score is "<<p2score<<endl;
+                }
+                if (p3score > 0) {
+                cout <<"Player 3's score is "<<p3score<<endl;
+                }            }
             //P1 Wins
             if (p2score <= 0 && p3score <= 0){
                 winner = 1;
