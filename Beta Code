@@ -10,7 +10,7 @@
 using namespace std;
 int p1score = 30;
 int p2score = 30;
-int p3score = 1;
+int p3score = 30;
 int winner = 0;
 void startScreen();
 void game(int numPlayers, int numCards, int displayPlayer);
@@ -472,30 +472,6 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                             }
                         }
                     }
-
-                    // Play the NPC's card
-                 if (com2value >= 10) {
-                 cout <<" ________"<<endl;
-                cout <<"/P3      \\"<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|   "<<com2value<<"   |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|      P3|"<<endl;
-                cout <<"\\________/"<<endl;
-            }
-            else if (com2value < 10) {
-                cout <<" ________"<<endl;
-                cout <<"/P3      \\"<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|   "<<com2value<<"    |  Player 3 played "<<playerHands[npc][selectedCardIndex]<<endl;
-                cout <<"|        |"<<endl;
-                cout <<"|      P3|"<<endl;
-                cout <<"\\________/"<<endl;
-            }
-
-                    playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
                 }
             }
 
@@ -761,13 +737,9 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     cout <<"|      P1|"<<endl;
                     cout <<"\\________/"<<endl;
                     choice= lowestIdx + 1; // Auto-play the lowest card if the chosen card is lower than com2value
-                    // Remove the card from the player's hand
-                    playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
             }
-                else {
                     // Remove the card from the player's hand
                     playerHands[displayPlayer - 1].erase(playerHands[displayPlayer - 1].begin() + (choice - 1));
-                    }
 
                 if (p1cardvalue >= com2value && p1cardvalue >= com1value){
                     highestCardPlayer = 1;
@@ -1039,6 +1011,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 cout <<"\\________/"<<endl;
             }
             playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
+
                 if (p2score > 1 && com1value >= com2value && com1value >= p1cardvalue){
                   highestCardPlayer = 2;
                 }
@@ -1183,7 +1156,12 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             system("pause");
             }
             // Determine the lowest card among the last cards of all players
-
+            if (p3score < 1){
+                com2value = 999;
+            }
+            if (p2score < 1){
+                com1value = 999;
+            }
             if (p1cardvalue < com1value && p1cardvalue < com2value) {
                 cout <<endl<< "Player 1 has the lowest card!" << endl;
                 p2score=p2score-com1value;
