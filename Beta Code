@@ -255,7 +255,7 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                     lowestCardPlayer = 2;
                 }
             }
-            else if (p2score <= 0){
+            else if (p2score < 1){
                 // NPC2 play their cards
                 if (p3score >= 1 ) {
                     for (int npc = 2; npc < 3; npc++) {
@@ -314,6 +314,12 @@ void game(int numPlayers, int numCards, int displayPlayer) {
             }
 
                         playerHands[npc].erase(playerHands[npc].begin() + selectedCardIndex);
+                        if (com2value >= p1cardvalue) {
+                            highestCardPlayer = 3;
+                        }
+                        if (com2value < p1cardvalue) {
+                            highestCardPlayer = 1;
+                        }
                     }
                 }
             }
@@ -1045,7 +1051,10 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 if (playerHands[displayPlayer - 1].empty()) {
                     break;
                 }
-                if (playerHands[displayPlayer - 1].size()!= 0) {
+
+                }
+            }
+            if (playerHands[displayPlayer - 1].size()!= 0) {
                  //Displays which player won the round
                 cout << endl << "\n--------------------------\n";
                 cout << "| Player " << highestCardPlayer << " won the round |";
@@ -1055,10 +1064,9 @@ void game(int numPlayers, int numCards, int displayPlayer) {
                 system("cls");
                 if (playerHands[displayPlayer - 1].empty()) {
                     break;
-                }
-            }
         }
-        }
+
+    }
         // Check if the game has ended
         if (playerHands[0].size() == 1 || playerHands[1].size() == 1 || playerHands[2].size() == 1) {
             // Allow the user to play their last card
